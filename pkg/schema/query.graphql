@@ -1,0 +1,8 @@
+# The Query type represents all of the entry points into the API.
+type Query {
+  # Get all Hosts
+  allHosts(after: String, first: Int, before: String, last: Int): HostConnection!
+
+  # Get all Vulnerabilties
+  allVulnerabilties(after: String, first: Int, before: String, last: Int): VulnerabilityConnection!
+}

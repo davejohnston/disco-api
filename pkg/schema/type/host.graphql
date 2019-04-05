@@ -1,0 +1,44 @@
+# A Puppet Host node
+
+type HostsEdge {
+  node: Host
+  cursor: String!
+}
+
+type HostConnection {
+  #A count of the total number of objects in this connection, ignoring pagination. This allows a client to fetch the first five objects by passing "5" as the argument to "first", then fetch the total count so it could display "5 of 83", for example.
+  totalCount: Int!
+  pageInfo: PageInfo!
+  hosts: [Host]
+  edges: [HostsEdge]
+}
+
+type Host {
+  # A unique identifier.
+  id: ID!
+  # Parent ID
+  parentID: ID
+  # A name used to identify this host
+  name: String!
+  # Hostname that identifies this host
+  hostname: String
+  # The primary IPv4 Address of this host
+  privateIPv4: String!
+  # The IP address of this node. In a cloud environment, the private IP.
+  privateIPv6: String
+  # The publicly routable IP address of this node
+  publicIPv4: String
+  # The publicly routable IP address of this node
+  publicIPv6: String
+  # The name of this node in dns. In a cloud environment, the private DNS name.
+  dnsName: String
+  # The publicly resolvable name of this node in dns.
+  publicDnsName: String
+  # The RFC3339 date format of the time that this resource was created.
+  createdAt: Time!
+  # The RFC3339 date format of the time that this resource was updated.
+  updatedAt: Time
+
+  vulnerabiltiesConnection(after: String, first: Int, before: String, last: Int): VulnerabilityConnection
+}
+
